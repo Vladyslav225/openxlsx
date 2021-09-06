@@ -3,7 +3,7 @@ from openpyxl import Workbook
 
 
 
-class ListDict_txt_xsl:
+class ListDict_txt_xlsx:
 
      def __init__(self, list_):
 
@@ -57,7 +57,7 @@ convert = object_list.convert_list_to_dict()
 save_file_txt = object_list.save_in_file()
 
 read_file_txt = object_list.read_from_file()
-# print(read_file_txt)
+print(read_file_txt)
 
 save_file_xlsx = object_list.save_in_xlsx()
 
