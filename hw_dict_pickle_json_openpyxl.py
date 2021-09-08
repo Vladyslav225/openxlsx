@@ -2,7 +2,6 @@ from openpyxl import load_workbook
 from openpyxl import Workbook
 
 
-
 class ListDict_txt_xlsx:
 
      def __init__(self, list_):
@@ -36,30 +35,45 @@ class ListDict_txt_xlsx:
 
                return v
 
-     def save_in_xlsx(self):
+     def save_in_xlsx(self, key, value):
 
           wb = Workbook()
           sheet = wb.active
-          sheet['A1'] = str(self.dict_)
+          sheet['A1'] = 'Key'
+          sheet['B1'] = 'Value'
+
+          for row, (key, value) in enumerate(self.dict_.items(), start=2):
+               sheet[f'A{row}'] = key
+               sheet[f'B{row}'] = value
+
           wb.save('dict.xlsx')
           wb.close()
 
      def read_in_xlsx(self):
+
+          dict_res = {}
+
           wb = load_workbook('dict.xlsx')
           wb.active
-          sheet = wb.active
-          return sheet['A1'].value
+          wb.active
 
-object_list = ListDict_txt_xsl(list_ = [1, 2, 3, 4, 5])
+          for key, value in (self.dict_.items()):
+               dict_res[key] = key
+               dict_res[value] = value
+
+          return dict_res
+          
+
+object_list = ListDict_txt_xlsx(list_ = [1, 2, 3, 4, 5])
 
 convert = object_list.convert_list_to_dict()
 
 save_file_txt = object_list.save_in_file()
 
 read_file_txt = object_list.read_from_file()
-print(read_file_txt)
+print(f'Reading a dictionary from a text file{read_file_txt}')
 
-save_file_xlsx = object_list.save_in_xlsx()
+save_file_xlsx = object_list.save_in_xlsx('key', 'value')
 
 read_file_xlsx = object_list.read_in_xlsx()
-print(read_file_xlsx)
+print(f'Reading a dictionary from Exel file{read_file_xlsx}')
